@@ -13,7 +13,7 @@ import org.gradle.kotlin.dsl.getByType
  * @param commonExtension
  */
 internal fun Project.configureComposeApplication(
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     val libs = extensions.getByType<VersionCatalogsExtension>().named("versionCatalogLibs")
 

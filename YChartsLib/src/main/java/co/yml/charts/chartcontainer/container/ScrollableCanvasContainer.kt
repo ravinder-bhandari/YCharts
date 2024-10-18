@@ -1,5 +1,6 @@
 package co.yml.charts.chartcontainer.container
 
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -54,6 +55,8 @@ fun ScrollableCanvasContainer(
     layoutDirection: LayoutDirection = LayoutDirection.Ltr,
     onPointClicked: (Offset, Float) -> Unit = { _, _ -> },
     isPinchZoomEnabled: Boolean = true,
+    zoomCoerceAtLeast: Float = 0.1f,
+    zoomCoerceAtMost: Float = 100f,
     onScroll: () -> Unit = {},
     onZoomInAndOut: () -> Unit = {},
     scrollOrientation: Orientation = Orientation.Horizontal
@@ -70,7 +73,7 @@ fun ScrollableCanvasContainer(
         delta
     }
 
-    if (scrollState.isScrollInProgress){
+    if (scrollState.isScrollInProgress) {
         onScroll()
     }
 
@@ -100,7 +103,9 @@ fun ScrollableCanvasContainer(
                     detectZoomGesture(
                         isZoomAllowed = isPinchZoomEnabled,
                         onZoom = { zoom ->
-                            xZoom.value *= zoom
+                            xZoom.value = (xZoom.value * zoom)
+                                .coerceAtLeast(zoomCoerceAtLeast)
+                                .coerceAtMost(zoomCoerceAtMost)
                             onZoomInAndOut()
                         }
                     )

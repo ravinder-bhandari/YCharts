@@ -28,6 +28,8 @@ data class LineChartData(
     val xAxisData: AxisData = AxisData.Builder().build(),
     val yAxisData: AxisData = AxisData.Builder().build(),
     val isZoomAllowed: Boolean = true,
+    val zoomCoerceAtLeast: Float = 0f,
+    val zoomCoerceAtMost: Float = 100f,
     val paddingTop: Dp = 30.dp,
     val bottomPadding: Dp = 10.dp,
     val paddingRight: Dp = 10.dp,

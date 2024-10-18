@@ -69,7 +69,7 @@ class LineChartActivity : ComponentActivity() {
                         LazyColumn(content = {
                             item {
                                 Text(
-                                    modifier=Modifier.padding(12.dp),
+                                    modifier = Modifier.padding(12.dp),
                                     text = getString(R.string.linechart_default_style),
                                     style = MaterialTheme.typography.subtitle1,
                                     fontWeight = FontWeight.Bold
@@ -82,86 +82,104 @@ class LineChartActivity : ComponentActivity() {
                                     )
                                 )
                                 Spacer(modifier = Modifier.height(12.dp))
-                                Divider(modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(1.dp))
+                                Divider(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(1.dp)
+                                )
                             }
                             item {
                                 Text(
-                                    modifier=Modifier.padding(12.dp),
+                                    modifier = Modifier.padding(12.dp),
                                     text = getString(R.string.linechart_straight_line_style),
                                     style = MaterialTheme.typography.subtitle1,
                                     fontWeight = FontWeight.Bold
                                 )
                                 StraightLinechart(DataUtils.getLineChartData(50, maxRange = 200))
                                 Spacer(modifier = Modifier.height(12.dp))
-                                Divider(modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(1.dp))
+                                Divider(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(1.dp)
+                                )
                             }
                             item {
                                 Text(
-                                    modifier=Modifier.padding(12.dp),
+                                    modifier = Modifier.padding(12.dp),
                                     text = getString(R.string.linechart_dotted_style),
                                     style = MaterialTheme.typography.subtitle1,
                                     fontWeight = FontWeight.Bold
                                 )
-                                DottedLinechart(DataUtils.getLineChartData(
-                                            200,
-                                            start = -50,
-                                            maxRange = 50
-                                        ))
+                                DottedLinechart(
+                                    DataUtils.getLineChartData(
+                                        200,
+                                        start = -50,
+                                        maxRange = 50
+                                    )
+                                )
                                 Spacer(modifier = Modifier.height(12.dp))
-                                Divider(modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(1.dp))
+                                Divider(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(1.dp)
+                                )
                             }
                             item {
                                 Text(
-                                    modifier=Modifier.padding(12.dp),
+                                    modifier = Modifier.padding(12.dp),
                                     text = getString(R.string.linechart_multiple_tones),
                                     style = MaterialTheme.typography.subtitle1,
                                     fontWeight = FontWeight.Bold
                                 )
-                                MultipleToneLinechart(DataUtils.getLineChartData(
-                                            200,
-                                            start = -50,
-                                            maxRange = 50
-                                        ))
+                                MultipleToneLinechart(
+                                    DataUtils.getLineChartData(
+                                        200,
+                                        start = -50,
+                                        maxRange = 50
+                                    )
+                                )
                                 Spacer(modifier = Modifier.height(12.dp))
-                                Divider(modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(1.dp))
+                                Divider(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(1.dp)
+                                )
                             }
                             item {
                                 Text(
-                                    modifier=Modifier.padding(12.dp),
+                                    modifier = Modifier.padding(12.dp),
                                     text = getString(R.string.combined_line_chart),
                                     style = MaterialTheme.typography.subtitle1,
                                     fontWeight = FontWeight.Bold
                                 )
-                                CombinedLinechart(DataUtils.getLineChartData(
-                                            200,
-                                            start = -50,
-                                            maxRange = 50
-                                        ))
+                                CombinedLinechart(
+                                    DataUtils.getLineChartData(
+                                        200,
+                                        start = -50,
+                                        maxRange = 50
+                                    )
+                                )
                                 Spacer(modifier = Modifier.height(12.dp))
-                                Divider(modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(1.dp))
+                                Divider(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(1.dp)
+                                )
                             }
                             item {
                                 Text(
-                                    modifier=Modifier.padding(12.dp),
+                                    modifier = Modifier.padding(12.dp),
                                     text = getString(R.string.combined_line_chart),
                                     style = MaterialTheme.typography.subtitle1,
                                     fontWeight = FontWeight.Bold
                                 )
-                                CombinedLinechartWithBackground(DataUtils.getLineChartData(
-                                            200,
-                                            start = -50,
-                                            maxRange = 50
-                                        ))
+                                CombinedLinechartWithBackground(
+                                    DataUtils.getLineChartData(
+                                        200,
+                                        start = -50,
+                                        maxRange = 50
+                                    )
+                                )
                             }
                         })
                     }
@@ -211,6 +229,8 @@ private fun SingleLineChartWithGridLines(pointsData: List<Point>) {
         ),
         xAxisData = xAxisData,
         yAxisData = yAxisData,
+        zoomCoerceAtLeast = 0.2f,
+        zoomCoerceAtMost = 15f,
         gridLines = GridLines()
     )
     LineChart(
@@ -432,7 +452,7 @@ private fun CombinedLinechart(pointsData: List<Point>) {
             val yScale = (yMax - yMin) / steps
             ((i * yScale) + yMin).formatToSinglePrecision()
         }.build()
-    val colorPaletteList = listOf<Color>(Color.Blue,Color.Yellow,Color.Magenta,Color.DarkGray)
+    val colorPaletteList = listOf<Color>(Color.Blue, Color.Yellow, Color.Magenta, Color.DarkGray)
     val legendsConfig = LegendsConfig(
         legendLabelList = DataUtils.getLegendsLabelData(colorPaletteList),
         gridColumnCount = 4
@@ -465,8 +485,11 @@ private fun CombinedLinechart(pointsData: List<Point>) {
                     )
                 ),
                 Line(
-                    dataPoints = pointsData.subList(10,20),
-                    lineStyle = LineStyle(lineType = LineType.SmoothCurve(), color = colorPaletteList[1]),
+                    dataPoints = pointsData.subList(10, 20),
+                    lineStyle = LineStyle(
+                        lineType = LineType.SmoothCurve(),
+                        color = colorPaletteList[1]
+                    ),
                     intersectionPoint = IntersectionPoint(color = Color.Red),
                     selectionHighlightPopUp = SelectionHighlightPopUp(popUpLabel = { x, y ->
                         val xLabel = "x : ${(1900 + x).toInt()} "
@@ -547,7 +570,7 @@ private fun CombinedLinechartWithBackground(pointsData: List<Point>) {
             val yScale = (yMax - yMin) / steps
             ((i * yScale) + yMin).formatToSinglePrecision()
         }.build()
-    val colorPaletteList = listOf<Color>(Color.Blue,Color.Yellow,Color.Magenta,Color.DarkGray)
+    val colorPaletteList = listOf<Color>(Color.Blue, Color.Yellow, Color.Magenta, Color.DarkGray)
     val legendsConfig = LegendsConfig(
         legendLabelList = DataUtils.getLegendsLabelData(colorPaletteList),
         gridColumnCount = 4
@@ -580,8 +603,11 @@ private fun CombinedLinechartWithBackground(pointsData: List<Point>) {
                     )
                 ),
                 Line(
-                    dataPoints = pointsData.subList(10,20),
-                    lineStyle = LineStyle(lineType = LineType.SmoothCurve(), color = colorPaletteList[1]),
+                    dataPoints = pointsData.subList(10, 20),
+                    lineStyle = LineStyle(
+                        lineType = LineType.SmoothCurve(),
+                        color = colorPaletteList[1]
+                    ),
                     intersectionPoint = IntersectionPoint(color = Color.Red),
                     selectionHighlightPopUp = SelectionHighlightPopUp(popUpLabel = { x, y ->
                         val xLabel = "x : ${(1900 + x).toInt()} "
